@@ -36,13 +36,14 @@ def index():
         answers = {k: request.form.get(k, "") for k in questions}
         artefact1 = request.form.get("artefact1", "")
         artefact2 = request.form.get("artefact2", "")
-        return render_template("results.html",
-                               submit_link=SUBMIT_LINK,
-                               questions=questions,
-                               answers=answers,
-                               artefacts=[artefact1, artefact2])
+        return render_template(
+            "results.html",
+            submit_link=SUBMIT_LINK,
+            questions=questions,
+            answers=answers,
+            artefacts=[artefact1, artefact2]
+        )
     return render_template("index.html", submit_link=SUBMIT_LINK)
 
 if __name__ == "__main__":
     app.run(debug=True)
-
