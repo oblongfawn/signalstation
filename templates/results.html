@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Results</title></head>
+<body>
+  <h1>Thank you!</h1>
+  <p>Submitted link: <a href="{{ submit_link }}" target="_blank">{{ submit_link }}</a></p>
+  <h2>Your responses:</h2>
+  <ul>
+    {% for key in questions %}
+      <li><strong>{{ key }}:</strong> {{ answers[key] }}</li>
+    {% endfor %}
+  </ul>
+  <h2>Speculative Artefacts:</h2>
+  <ol>
+    {% for art in artefacts %}
+      <li>{{ art }}</li>
+    {% endfor %}
+  </ol>
+</body>
+</html>
