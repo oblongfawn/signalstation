@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>Signal Station Form</title></head>
+<body>
+  <h1>Signal to submit</h1>
+  <p><a href="{{ submit_link }}" target="_blank">{{ submit_link }}</a></p>
+  <form method="post">
+    <h2>Choose question set</h2>
+    <label><input type="radio" name="question_set" value="overlooked" checked> Overlooked Framework</label><br>
+    <label><input type="radio" name="question_set" value="standard"> Standard Signal Station</label>
+    <div id="questions"></div>
+    <hr>
+    <h2>Speculative Artefacts</h2>
+    <label>Artefact 1:<br><input type="text" name="artefact1" size="60"></label><br><br>
+    <label>Artefact 2:<br><input type="text" name="artefact2" size="60"></label><br><br>
+    <button type="submit">Submit</button>
+  </form>
+  <script>
+    const sets = {{ QUESTION_SETS | tojson }};
+    const container = document.getElementById("questions");
+    function render() {
+      const choice = document.querySelector("input[name=question_set]:checked").value;
+      const qs = sets[choice];
+      container.innerHTML = "";
+      for (let key in qs) {
+        container.innerHTML += `
+          <label><strong>${key}:</strong> ${qs[key]}<br>
+            <input type="text" name="${key}" size="80">
+          </label><br><br>`;
+      }
+    }
+    document.querySelectorAll("input[name=question_set]").forEach(r => r.onchange = render);
+    render();
+  </script>
+</body>
+</html>
